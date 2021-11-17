@@ -1,10 +1,9 @@
 package Page;
 
-import Model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class pendingPage {
+public class PendingPage {
 
     private By forStateXpath = By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_ddlNewAppState\"]/option[8]");
     private By examinerCompanyXpath = By.xpath("//*[@id=\"ctl00_ContentPlaceHolder1_ddlNewAppVendor_ddlVendor\"]/option[3]");

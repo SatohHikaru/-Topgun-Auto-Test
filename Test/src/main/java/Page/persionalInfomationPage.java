@@ -4,7 +4,7 @@ import Model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class persionalInfomationPage {
+public class PersionalInfomationPage {
 
     private By firstnameXpath = By.xpath("//*[@id=\"ctl_insured_first_name\"]");
     private By middlenameXpath = By.xpath("//*[@id=\"MainPane\"]/table/tbody/tr[3]/td[3]/div/input");
@@ -21,8 +21,6 @@ public class persionalInfomationPage {
     public void fillFunction(WebDriver driver){
 
         User user = new User();
-        String heading = driver.findElement(By.xpath("/html/body/div/form/div[1]/div[1]/table/tbody/tr/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[3]")).getText();
-        System.out.println(heading);
 
         driver.findElement(firstnameXpath).sendKeys(user.getFirstName());
 

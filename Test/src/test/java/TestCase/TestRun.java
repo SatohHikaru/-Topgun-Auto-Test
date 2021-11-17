@@ -1,46 +1,77 @@
 package TestCase;
 
 import Page.*;
-import Model.driverConnect;
+import Model.DriverConnect;
 
-import Page.pendingPage;
+import Page.PendingPage;
+//import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.Test;
 //import java.util.concurrent.TimeUnit;
 
 
 public class TestRun {
 
-    public static void main(String[] args) {
+    private static PageHelper pagehelper = new PageHelper();
+    private static Login login = new Login();
+    private static PendingPage pendingpage = new PendingPage();
+    private static PersionalInfomationPage persionalinfomationpage = new PersionalInfomationPage();
+    private static WebDriver driver;
 
-        popupPDFImageTestcase();
 
+//    public static void main(String[] args) {
+//
+//        //Setup default
+//        DriverConnect.setUpDriverChorme();
+//        driver = new ChromeDriver();
+//        pagehelper.enterMainPage(driver);
+//
+//        //Testcase Need Run
+//        popupPDFImageTestcase(driver);
+//
+//    }
+//
+//    public static void LoginTestCase( WebDriver driver){
+//
+//        Login login = new Login();
+//        PendingPage pendingpage = new PendingPage();
+//        PersionalInfomationPage persionalinfomationpage = new PersionalInfomationPage();
+//
+//        //Login To page
+//        login.loginFunction(driver);
+//
+//    }
+//
+//    public static void popupPDFImageTestcase( WebDriver driver){
+//
+//        //Login To page
+//        login.loginFunction(driver);
+//
+//        //Create Function in Pending page
+//        pendingpage.createNewFunction(driver);
+//
+//        //Switch focus when have new tab opened
+//        pagehelper.switchFocusNewTab(driver);
+//
+//        //Fill information into inputs
+//        persionalinfomationpage.fillFunction(driver);
+//
+//    }
+
+    @BeforeTest
+    public static void setupDriver(){
+
+        DriverConnect.setUpDriverChorme();
+        driver = new ChromeDriver();
+        pagehelper.enterMainPage(driver);
     }
 
-    public static void switchNewTab(WebDriver driver){
-        String currentTab = driver.getWindowHandle();
-        for (String tab : driver.getWindowHandles()) {
-            if (!tab.equals(currentTab)) {
-                driver.switchTo().window(tab);
-            }
-        }
-    }
 
-    public static void LoginTestCase(){
-        driverConnect.setUpDriver();
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://applicintweb.com/ExamRightTrunk/Default.aspx");
-        Login login = new Login();
-        login.loginFunction(driver);
-    }
-
-    public static void popupPDFImageTestcase(){
-        driverConnect.setUpDriver();
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://applicintweb.com/ExamRightTrunk/Default.aspx");
-        Login login = new Login();
-        pendingPage pendingpage = new pendingPage();
-        persionalInfomationPage persionalinfomationpage = new persionalInfomationPage();
+    @Test
+    void popupPDFImageTestcase(){
 
         //Login To page
         login.loginFunction(driver);
@@ -49,11 +80,15 @@ public class TestRun {
         pendingpage.createNewFunction(driver);
 
         //Switch focus when have new tab opened
-        switchNewTab(driver);
+        pagehelper.switchFocusNewTab(driver);
 
         //Fill information into inputs
         persionalinfomationpage.fillFunction(driver);
+    }
 
+    @AfterTest
+    void close(){
+       driver.close();
     }
 
 }
